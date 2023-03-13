@@ -2,6 +2,8 @@ from enum import Enum
 from pyibex import IntervalVector, LargestFirst
 from collections import deque
 
+from vibes import vibes
+
 
 class IBOOL(Enum):
     IN = 0
@@ -35,3 +37,19 @@ def SIVIA(X0, test, eps):
                 L_too_small.append(X)
     print("Number of tests : %d" % i)
     return L_clear, L_dark, L_too_small
+
+def draw_SIVIA(L_clear: deque, L_dark: deque,  L_too_small: deque):
+    while len(L_clear) > 0: # red
+        X = L_clear.popleft()
+        vibes.drawBox(X[0][0], X[0][1], X[1][0], X[1][1], '[#DC143C]')
+
+    while len(L_dark) > 0: # blue
+        X = L_dark.popleft()
+        vibes.drawBox(X[0][0], X[0][1], X[1][0], X[1][1], '[#00BFFF]')
+
+
+    while len(L_too_small) > 0: # yellow
+        X = L_too_small.popleft()
+        vibes.drawBox(X[0][0], X[0][1], X[1][0], X[1][1], '[#FFD700]')
+
+    vibes.axisEqual()
