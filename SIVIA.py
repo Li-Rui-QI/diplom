@@ -47,7 +47,6 @@ def draw_SIVIA(L_clear: deque, L_dark: deque,  L_too_small: deque):
         X = L_dark.popleft()
         vibes.drawBox(X[0][0], X[0][1], X[1][0], X[1][1], '[#00BFFF]')
 
-
     while len(L_too_small) > 0: # yellow
         X = L_too_small.popleft()
         vibes.drawBox(X[0][0], X[0][1], X[1][0], X[1][1], '[#FFD700]')
