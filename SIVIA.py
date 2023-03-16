@@ -1,8 +1,11 @@
 from enum import Enum
+
+from matplotlib import patches
+
 from pyibex import IntervalVector, LargestFirst
 from collections import deque
+import matplotlib.pyplot as plt
 
-from vibes import vibes
 
 
 class IBOOL(Enum):
@@ -39,16 +42,51 @@ def SIVIA(X0, test, eps):
     return L_clear, L_dark, L_too_small
 
 def draw_SIVIA(L_clear: deque, L_dark: deque,  L_too_small: deque):
+    ax = plt.gca()
     while len(L_clear) > 0: # red
         X = L_clear.popleft()
-        vibes.drawBox(X[0][0], X[0][1], X[1][0], X[1][1], '[#DC143C]')
-
+        x0 = X[0][0]
+        y0 = X[1][0]
+        width = X[0][1] - X[0][0]
+        height = X[1][1] - X[1][0]
+        ax.add_patch(patches.Rectangle(
+            (x0, y0),  # (x,y)
+            width,  # width
+            height,
+            edgecolor='black',
+            facecolor='red',
+            fill=True
+        )
+        )
     while len(L_dark) > 0: # blue
         X = L_dark.popleft()
-        vibes.drawBox(X[0][0], X[0][1], X[1][0], X[1][1], '[#00BFFF]')
-
+        x1 = X[0][0]
+        y1 = X[1][0]
+        width = X[0][1] - X[0][0]
+        height = X[1][1] - X[1][0]
+        ax.add_patch(patches.Rectangle(
+            (x1, y1),  # (x,y)
+            width,  # width
+            height,
+            edgecolor= 'black',
+            facecolor = 'blue',
+            fill=True)
+        )
     while len(L_too_small) > 0: # yellow
         X = L_too_small.popleft()
-        vibes.drawBox(X[0][0], X[0][1], X[1][0], X[1][1], '[#FFD700]')
-
-    vibes.axisEqual()
+        x2 = X[0][0]
+        y2 = X[1][0]
+        width = X[0][1] - X[0][0]
+        height = X[1][1] - X[1][0]
+        ax.add_patch(patches.Rectangle(
+            (x2, y2),  # (x,y)
+            width,  # width
+            height,
+            edgecolor='black',
+            facecolor = 'yellow',
+            fill=True
+        )
+        )
+    ax.set_xlim([-2, 4])
+    ax.set_ylim([-3, 5])
+    plt.show()
