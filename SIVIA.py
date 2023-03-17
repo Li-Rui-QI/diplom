@@ -41,7 +41,8 @@ def SIVIA(X0, test, eps):
     print("Number of tests : %d" % i)
     return L_clear, L_dark, L_too_small
 
-def draw_SIVIA(L_clear: deque, L_dark: deque,  L_too_small: deque):
+def draw_SIVIA(X0,L_clear: deque, L_dark: deque,  L_too_small: deque):
+    plt.title('с помощью классических интервалов SIVIA')
     ax = plt.gca()
     while len(L_clear) > 0: # red
         X = L_clear.popleft()
@@ -87,6 +88,6 @@ def draw_SIVIA(L_clear: deque, L_dark: deque,  L_too_small: deque):
             fill=True
         )
         )
-    ax.set_xlim([-2, 4])
-    ax.set_ylim([-3, 5])
-    plt.show()
+    ax.set_xlim([X0[0][0], X0[0][1]])
+    ax.set_ylim([X0[1][0], X0[1][1]])
+    plt.savefig('./test1.jpg')

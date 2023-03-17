@@ -7,5 +7,5 @@ if __name__ == '__main__':
     X0 = IntervalVector([[-2, 4], [-3, 5]])
     pdc = Disk(Interval(0, 1), Interval(0, 1), 2, 2)
     L_clear, L_dark, L_too_small =SIVIA(X0, pdc, 0.1)
-    draw_SIVIA(L_clear, L_dark, L_too_small)
-
+    draw_SIVIA(X0,L_clear, L_dark, L_too_small)
+    plt.show()
