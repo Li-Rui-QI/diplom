@@ -42,7 +42,7 @@ def SIVIA(X0, test, eps):
     return L_clear, L_dark, L_too_small
 
 def draw_SIVIA(X0,L_clear: deque, L_dark: deque,  L_too_small: deque):
-    plt.title('с помощью классических интервалов SIVIA')
+
     ax = plt.gca()
     while len(L_clear) > 0: # red
         X = L_clear.popleft()
