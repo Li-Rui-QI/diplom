@@ -42,14 +42,15 @@ def SIVIA(X0, test, eps):
     return L_clear, L_dark, L_too_small
 
 def draw_SIVIA(X0,L_clear: deque, L_dark: deque,  L_too_small: deque):
-
     ax = plt.gca()
+    sum = 0
     while len(L_clear) > 0: # red
         X = L_clear.popleft()
         x0 = X[0][0]
         y0 = X[1][0]
         width = X[0][1] - X[0][0]
         height = X[1][1] - X[1][0]
+        sum += abs(width * height)
         ax.add_patch(patches.Rectangle(
             (x0, y0),  # (x,y)
             width,  # width
@@ -91,3 +92,5 @@ def draw_SIVIA(X0,L_clear: deque, L_dark: deque,  L_too_small: deque):
     ax.set_xlim([X0[0][0], X0[0][1]])
     ax.set_ylim([X0[1][0], X0[1][1]])
     plt.savefig('./test1.jpg')
+    print(sum)
+    return sum

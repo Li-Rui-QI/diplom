@@ -42,32 +42,27 @@ class CommArea:
         elif self.is_thin:
             return IBOOL.UNK
 
-
-def add_patch(cir1):
-    pass
-
-
 def test_1():
 
     eps = 0.5
     X0 = IntervalVector(2, [-20, 20])
 
     m = [
-        [Interval(1).inflate(0.5), Interval(3).inflate(0.5)],
-        [Interval(5).inflate(0.5), Interval(-3).inflate(0.5)],
-        [Interval(5).inflate(0.5), Interval(6).inflate(0.5)],
-        [Interval(-2).inflate(0.5), Interval(-5).inflate(0.5)]
+        [Interval(-5).inflate(0.5), Interval(5).inflate(0.5)],
+        [Interval(-5).inflate(0.5), Interval(15).inflate(0.5)],
+        [Interval(5).inflate(0.5), Interval(5).inflate(0.5)],
+        [Interval(5).inflate(0.5), Interval(15).inflate(0.5)],
+        [Interval(0).inflate(0.5), Interval(15).inflate(0.5)],
+        [Interval(0).inflate(0.5), Interval(-5).inflate(0.5)]
+    #     [Interval(4).inflate(0.5), Interval(-1).inflate(0.5)]
     ]
-
+    # m = [[Interval(-5).inflate(0.5), Interval(5).inflate(0.5)]]
     L_clear, L_dark, L_too_small = SIVIA(X0, CommArea(m,True), eps)
     draw_SIVIA(X0,L_clear, L_dark,L_too_small)
     plt.title('CommArea с помощью классических интервалов SIVIA')
+    # plt.title('Четкая зона связи для m = (0 ± 0.3, 0 ± 0.5)')
 
     for item in m:
-
-        cir1 = Circle(xy=(item[0].mid(), item[1].mid()), radius=0.2, alpha=0.5)
-        add_patch(cir1)
-
         ax = plt.gca()
         x0 = item[0][0]
         y0 = item[1][0]
