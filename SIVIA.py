@@ -91,6 +91,6 @@ def draw_SIVIA(X0,L_clear: deque, L_dark: deque,  L_too_small: deque):
         )
     ax.set_xlim([X0[0][0], X0[0][1]])
     ax.set_ylim([X0[1][0], X0[1][1]])
-    plt.savefig('./test1.jpg')
-    print(sum)
+    # plt.savefig('./test1.jpg')
+    # print(sum)
     return sum

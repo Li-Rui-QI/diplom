@@ -19,9 +19,10 @@ if __name__ == '__main__':
     # test_1()
     # line_chart()
     # test_2()
-    I_1, probes_1, currents_1=generate(4, 4, True)
-    # # print("I",I, "probes",probes, "currents",currents)
-    A = find_matrix_A(I_1, probes_1, currents_1)*1e7
-    print(A)
+    # I_1, probes_1, currents_1=generate(4, 4, True)
+    # A = find_matrix_A(I_1, probes_1, currents_1)*1e7
+    # Im = IntervalVector(len(A))
+    # print(Im)
+    # print(A)
     # case1()
-    # testcase_2()
+    testcase_2()
