@@ -21,14 +21,16 @@ class TolUnSolSets:
         for i in range(0, len(self.A)):
             Im[i] = min(self.A[i][0] * I[0], self.A[i][1] * I[0]) + min(self.A[i][2] * I[1], self.A[i][3]*I[1])
             Ip[i] = max(self.A[i][0] * I[0], self.A[i][1] * I[0]) + max(self.A[i][2] * I[1], self.A[i][3]*I[1])
+
         # Im = IntervalVector([
-        #     (min(A[0][0] * I[0], A[0][1] * I[0]) + min(A[0][2] * I[1], A[0][3]*I[1])),
-        #     (min(A[3][0] * I[0], A[3][1] * I[0]) + min(A[3][2] * I[1], A[3][3]*I[1]))
+        #     (min(self.A[0][0] * I[0], self.A[0][1] * I[0]) + min(self.A[0][2] * I[1], self.A[0][3]*I[1])),
+        #     (min(self.A[3][0] * I[0], self.A[3][1] * I[0]) + min(self.A[3][2] * I[1], self.A[3][3]*I[1]))
         # ])
         #
         # Ip = IntervalVector([
-        #     (max(A[0][0] * I[0], A[0][1] * I[0]) + max(A[0][2] * I[1], A[0][3] * I[1])),
-        #     (max(A[3][0] * I[0], A[3][1] * I[0]) + max(A[3][2] * I[1], A[3][3] * I[1]))
+        #     (max(self.A[0][0] * I[0], self.A[0][1] * I[0]) + max(self.A[0][2] * I[1], self.A[0][3] * I[1])),
+        #     (max(self.A[3][0] * I[0], self.A[3][1] * I[0]) + max(self.A[3][2] * I[1], self.A[3][3] * I[1]))
+        #
         #
         # ])
 
@@ -58,8 +60,9 @@ def testcase_2():
     eps = 0.1
     I_1, probes_1, currents_1 = generate(4, 4, True)
     A = find_matrix_A(I_1, probes_1, currents_1) * 1e7
-    I0 = IntervalVector([[-30, 40], [-35, 50]])
-    b = IntervalVector([[-9.7 ,30], [-4.7, 20]])
+    I0 = IntervalVector([[-10, 15], [-8, 10]])
+    # b = IntervalVector([[-5.7, 5],  [-7, 7]])
+    b = IntervalVector([[-5.7 ,5], [-4.7, 6],[-2,3],[-7,7]])
     L_clear, L_dark, L_too_small = SIVIA(I0, TolUnSolSets(b,A), eps)
     draw_SIVIA(I0,L_clear, L_dark,L_too_small)
     plt.show()
