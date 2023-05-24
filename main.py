@@ -7,6 +7,7 @@ from Location import *
 from Communication_area import test_1
 from FindMatrixA import *
 from InverseTor import *
+from Ocean_exp import *
 
 if __name__ == '__main__':
     # create a new figure
@@ -18,11 +19,12 @@ if __name__ == '__main__':
     # plt.show()
     # test_1()
     # line_chart()
-    # test_2()
+    # loc()
     # I_1, probes_1, currents_1=generate(4, 4, True)
     # A = find_matrix_A(I_1, probes_1, currents_1)*1e7
     # Im = IntervalVector(len(A))
     # print(Im)
     # print(A)
     # case1()
-    testcase_2()
+    # testcase_2()
+    ocean()

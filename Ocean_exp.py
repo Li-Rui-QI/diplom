@@ -1,3 +1,17 @@
+from ipyleaflet import Map, basemaps, basemap_to_tiles, Rectangle, Polyline, LayersControl
+from matplotlib import cm
+import matplotlib.pylab as plt
+from mpl_toolkits import mplot3d
+
+import pandas as pd
+import numpy as np
+import pathlib as pl
+import datetime
+
+import csv
+import math
+import random
+
 from pyibex import *
 from SIVIA import *
 
@@ -7,10 +21,10 @@ MINUS = Function("x1", "x2", "y1", "y2", "(x1 - y2, x2 - y1)")
 PLUS = Function("x1", "x2", "y1", "y2", "(x1 + y1, x2 + y2)")
 
 
-class Location:
+class Ocean_exp:
     def __init__(self, m):
         self.l_m = m
-        self.Bp = IntervalVector(len(m), [0, 30 ** 2])
+        self.Bp = IntervalVector(len(m), [0, 100])
 
     def test(self, X):
         Xm = IntervalVector(len(self.l_m))
@@ -65,26 +79,34 @@ class Location:
         else:
             return IBOOL.UNK
 
+def ocean():
 
-def loc():
+    sss_df = pd.read_csv('./data/side-scan-sonar-index.csv', sep=';', low_memory=False)
+    # print(sss_df.head())
+    sss_latitude = sss_df['Latitude'].to_numpy(dtype=np.float32)
+    sss_longitude = sss_df['Longitude'].to_numpy(dtype=np.float32)
+    m = []
+    new_latitude =[]
+    new_longitude = []
+    for i in range(len(sss_latitude)):
+        new_latitude.append(sss_latitude[i]+ 0.1 * i)
+        new_longitude.append(sss_longitude[i] + 0.05 * i)
+    for i in range(len(sss_latitude)):
+        m.append([Interval(new_latitude[i]).inflate(0.1), Interval(new_longitude[i]).inflate(0.1)])
+    fig, ax = plt.subplots(nrows=1, ncols=1)
+    plt.plot(new_longitude, new_latitude, color='k')
+    plt.plot(new_longitude[0], new_latitude[0], color='g', marker='.', markersize=20)
+    plt.plot(new_longitude[-2], new_latitude[-2], color='r', marker='.', markersize=20)
+    ax.set_xlabel('Longitude')
+    ax.set_ylabel('Latitude')
+    ax.axis('equal')
+    plt.figure()
+    X0 = IntervalVector([[30,80], [-20, 10]])
     eps = 0.5
-
-    X0 = IntervalVector(2, [-50, 50])
-
-    m = [
-        [Interval(1).inflate(0.5), Interval(3).inflate(0.5)],
-        [Interval(5).inflate(0.5), Interval(-3).inflate(0.5)],
-        [Interval(-5).inflate(0.5), Interval(-6).inflate(0.5)],
-        [Interval(-2).inflate(0.5), Interval(-5).inflate(0.5)],
-        # [Interval(8, 12), Interval(-3, 1)],
-        # [Interval(8, 12), Interval(4, 8)]
-    ]
-
-    L_clear, L_dark,L_too_small = SIVIA(X0, Location(m), eps)
+    L_clear, L_dark,L_too_small = SIVIA(X0, Ocean_exp(m), eps)
     draw_SIVIA(X0,L_clear, L_dark, L_too_small)
-
-    x_set=[]
-    y_set=[]
+    x_set = []
+    y_set = []
     for item in m:
         ax = plt.gca()
         x0 = item[0][0]
@@ -101,6 +123,5 @@ def loc():
             facecolor='black',
             fill=True)
         )
-    plt.plot(x_set,y_set,'-',linewidth=0.5)
+    plt.plot(x_set, y_set, '-', linewidth=0.1)
     plt.show()
-
