@@ -1,6 +1,11 @@
 # diplom
-SIVIA algorithm
+SIVIA algorithm（SIVIA.py）
+
 
 # Тестовая задача (восстановление шнура тока по данным датчиков)
-B_(j_r ) (r_j,z_j )=I/c*2z/(r√((a+r)^2+z^2 ))*(-K(t)  +E(t)*(a^2+r^2+z^2)/((a-r)^2+z^2 )  )
-B_(j_z ) (r_j,z_j )=I/c*2/√((a+r)^2+z^2 )*(K(t)  +E(t)*(a^2-r^2-z^2)/((a-r)^2+z^2 )  )
+![image](https://github.com/Li-Rui-QI/diplom/assets/25670502/1a7decd4-7e3b-4625-8e98-9ceaf6af26b0)
+
+
+# Установка и запуск
+Скачать или клонировать данный репозиторий
+Запустить main.py
